@@ -17,12 +17,21 @@ Information Required
 $Message = @"
 Purpose:
 - Move an Azure Locical SQL Server that contains an Azure SQL Data Warehouse to a new subscription. This
-process can be used to help move other resoruces as well. While a Azure Logica SQL Server can be moved
+process can be used to help move other resoruces as well. While a Azure Logical SQL Server can be moved
 between subscriptions, a data warehouse cannot.
 
 Precausions
 - If you simply need to create a copy of an Azure SQL Data Warehouse to another server, there is an option
 to restore the Azure SQL Data Warehouse using the New Azure SQL Data Warehouse blade in the Azure Portal.
+https://docs.microsoft.com/en-us/azure/sql-data-warehouse/sql-data-warehouse-restore-database-portal
+
+- If you need to rename your Azure SQL Data Warehouse, the documentation for ALTER DATABASE is here
+https://docs.microsoft.com/en-us/sql/t-sql/statements/alter-database-azure-sql-data-warehouse
+Ensure that you are connected to master and not other activities are running when submitting ALTER DATABASE
+
+- If you have orphaned logins after any of these steps, reference the following link
+https://blogs.msdn.microsoft.com/joonkyulee/2017/10/08/mapping-a-login-to-a-user-in-azure-sql-data-warehouse/
+
 "@
 
 Clear-Host
@@ -65,4 +74,3 @@ try {
 } finally {
     Remove-Variable -Name DestinationResourceGroupName, LogicalSQLServerResourceIdToMove
 }
-
